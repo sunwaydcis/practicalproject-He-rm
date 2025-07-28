@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Mon Jul 28 18:00:47 MYT 2025:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217): instance a816c00e-0198-507a-45e0-00000f2de5c8 
+on database directory C:\Users\Herman\OneDrive\Documents\GitHub\practicalproject-He-rm\myDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@76ed5528 
+Loaded from file:/C:/Users/Herman/AppData/Local/Coursier/cache/v1/https/repo1.maven.org/maven2/org/apache/derby/derby/10.17.1.0/derby-10.17.1.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=21.0.7+8-LTS-245
+user.dir=C:\Users\Herman\OneDrive\Documents\GitHub\practicalproject-He-rm
+os.name=Windows 11
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

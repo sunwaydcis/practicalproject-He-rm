@@ -86,7 +86,7 @@ class PersonOverviewController():
   def handleDeletePerson(action: ActionEvent) =
     val selectedIndex = personTable.selectionModel().selectedIndex.value
     if (selectedIndex >= 0) then
-      personTable.items().remove(selectedIndex)
+      personTable.items().remove(selectedIndex).delete()
     else
       // Nothing selected.
       val alert = new Alert(AlertType.Information):
@@ -96,27 +96,33 @@ class PersonOverviewController():
         contentText = "Please select a person in the table."
       alert.showAndWait()
 
+  @FXML
   def handleNewPerson(action: ActionEvent) =
     val person = new Person("", "")
     val okClicked = MainApp.showPersonEditDialog(person);
-    if (okClicked) then
+    if (okClicked) then {
       MainApp.personData += person
-
+      val id = person.save()
+      id.map(x => person.id.value = x)
+    }
+  @FXML
   def handleEditPerson(action: ActionEvent) =
     val selectedPerson = personTable.selectionModel().selectedItem.value
     if (selectedPerson != null) then
       val okClicked = MainApp.showPersonEditDialog(selectedPerson)
 
-      if (okClicked) then showPersonDetails(Some(selectedPerson))
+      if (okClicked) then {
+        showPersonDetails(Some(selectedPerson))
+        selectedPerson.save()
 
-    else
-      // Nothing selected.
-      val alert = new Alert(Alert.AlertType.Warning):
-        initOwner(MainApp.stage)
-        title = "No Selection"
-        headerText = "No Person Selected"
-        contentText = "Please select a person in the table."
-      .showAndWait()
+      } else
+        // Nothing selected.
+        val alert = new Alert(Alert.AlertType.Warning):
+          initOwner(MainApp.stage)
+          title = "No Selection"
+          headerText = "No Person Selected"
+          contentText = "Please select a person in the table."
+        .showAndWait()
 
 
 

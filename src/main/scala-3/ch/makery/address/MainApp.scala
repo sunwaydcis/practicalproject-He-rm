@@ -1,6 +1,7 @@
 package ch.makery.address
 
 import ch.makery.address.model.Person
+import ch.makery.address.util.Database
 import ch.makery.address.view.{PersonEditDialogController, PersonOverviewController}
 import javafx.fxml.FXMLLoader
 import scalafx.application.JFXApp3
@@ -14,7 +15,7 @@ import scalafx.scene.image.Image
 import scalafx.stage.{Modality, Stage}
 
 object MainApp extends JFXApp3:
-
+  Database.setupDB()
   //Window Root Pane
   var roots: Option[scalafx.scene.layout.BorderPane] = None
   var cssResource = getClass.getResource("view/DarkTheme.css")
@@ -27,16 +28,7 @@ object MainApp extends JFXApp3:
   /**
    * Constructor
    */
-  personData += new Person("Hans", "Muster")
-  personData += new Person("Ruth", "Mueller")
-  personData += new Person("Heinz", "Kurz")
-  personData += new Person("Cornelia", "Meier")
-  personData += new Person("Werner", "Meyer")
-  personData += new Person("Lydia", "Kunz")
-  personData += new Person("Anna", "Best")
-  personData += new Person("Stefan", "Meier")
-  personData += new Person("Martin", "Mueller")
-
+  personData ++= Person.getAllPersons
 
   override def start(): Unit =
     // transform path of RootLayout.fxml to URI for resource location.
@@ -115,3 +107,10 @@ object MainApp extends JFXApp3:
 
   val add: (Int, Int) => Int = (a,b) => { a+b}
   println(add(1,2))
+
+  given Int = 59
+
+  def multiply(a: Int)(implicit c: Int) = a * c
+  def add(a: Int)(implicit c: Int) = a + c
+  def minus(a: Int)(implicit c: Int) = a - c
+
